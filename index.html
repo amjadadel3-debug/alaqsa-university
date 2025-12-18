@@ -39,9 +39,21 @@
         
         .btn-hover { transition: all 0.3s ease; }
         .btn-hover:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+
+        /* تنسيق صندوق الفيسبوك */
+        .fb-container {
+            max-width: 500px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 text-right">
+
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ar_AR/sdk.js#xfbml=1&version=v18.0"></script>
 
     <div id="adminPanel" class="admin-sidebar">
         <div class="flex justify-between items-center mb-6 border-b border-slate-700 pb-4">
@@ -119,6 +131,7 @@
                 <a href="#home" class="hover:text-yellow-500 transition">الرئيسية</a>
                 <a href="#about" class="hover:text-yellow-500 transition">عن الجامعة</a>
                 <a href="#faculties" class="hover:text-yellow-500 transition">الكليات</a>
+                <a href="#social-feed" class="hover:text-yellow-500 transition">المنشورات</a>
             </div>
             <button onclick="showLogin()" id="loginBtn" class="bg-yellow-600 text-black px-4 py-2 rounded-lg font-bold text-xs btn-hover">دخول</button>
             <button onclick="toggleAdmin()" id="adminTools" class="admin-btn bg-green-600 text-white px-4 py-2 rounded-lg hidden text-xs font-bold items-center gap-1 btn-hover"><i class="fas fa-cog"></i> الإدارة</button>
@@ -207,6 +220,27 @@
         </div>
     </section>
 
+    <section id="social-feed" class="py-20 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="uni-title text-3xl font-black mb-10 italic border-b-4 border-yellow-600 w-fit mx-auto pb-2">تابع جديدنا على فيسبوك</h3>
+            <div class="fb-container">
+                <div class="fb-page" 
+                    data-href="https://www.facebook.com/profile.php?id=61579917951873" 
+                    data-tabs="timeline" 
+                    data-width="500" 
+                    data-height="600" 
+                    data-small-header="false" 
+                    data-adapt-container-width="true" 
+                    data-hide-cover="false" 
+                    data-show-facepile="true">
+                    <blockquote cite="https://www.facebook.com/profile.php?id=61579917951873" class="fb-xfbml-parse-ignore">
+                        <a href="https://www.facebook.com/profile.php?id=61579917951873">جامعة الأقصى للعلوم والتكنولوجيا</a>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer id="contact" class="py-12 bg-black text-white border-t-4 border-yellow-600">
         <div class="container mx-auto px-6">
             <div class="grid lg:grid-cols-3 gap-10 items-start">
@@ -242,7 +276,7 @@
         const MASTER_PASS = "sayhi1322";
         const defaultData = {
             logo: "https://i.postimg.cc/85zX3S09/Screenshot.jpg",
-            fbUrl: "https://www.facebook.com/alaqsa.university.yemen",
+            fbUrl: "https://www.facebook.com/profile.php?id=61579917951873",
             founder: "الأستاذ عادل علي مساعد",
             rector: "الدكتور حمود القديمي",
             sec: "الدكتور خالد مساعد",
@@ -266,7 +300,6 @@
             } else { alert('كلمة المرور غير صحيحة!'); }
         }
 
-        // دالة الحفظ والخروج الفعلي
         function saveAndExit() {
             const data = {
                 ...defaultData,
@@ -278,11 +311,8 @@
                 newsDesc: document.getElementById('in-news-desc').value,
                 aboutText: document.getElementById('in-about-text').value
             };
-            // 1. حفظ البيانات
             localStorage.setItem('aqsa_data_v9', JSON.stringify(data));
-            // 2. تسجيل الخروج الفعلي
             localStorage.removeItem('univ_master_v9'); 
-            // 3. رسالة تأكيد وإعادة تحميل
             alert('تم حفظ التغييرات وتسجيل الخروج بنجاح');
             location.reload();
         }
