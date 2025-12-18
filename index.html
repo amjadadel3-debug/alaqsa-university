@@ -3,142 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>جامعة الأقصى للعلوم والتكنولوجيا - النظام الذكي</title>
+    <title>جامعة الأقصى للعلوم والتكنولوجيا</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
     <style>
-        :root { --gold: #c59d3f; --dark: #1a1a1a; --grey: #f4f7f6; --white: #ffffff; }
-        body { margin: 0; font-family: 'Cairo', sans-serif; background: var(--white); color: var(--dark); transition: 0.3s; }
-        
-        /* الهيدر */
-        header { background: var(--white); padding: 10px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; position: sticky; top:0; z-index: 100; }
-        .logo-box { display: flex; align-items: center; gap: 10px; }
-        .logo-img { height: 50px; border-radius: 5px; }
-
-        /* الواجهة */
-        .hero { height: 400px; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; color: white; position: relative; transition: 0.5s; }
+        :root { --gold: #c59d3f; --dark: #1a1a1a; --grey: #f4f7f6; }
+        body { margin: 0; font-family: 'Cairo', sans-serif; background: #fff; }
+        header { background: #fff; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .hero { height: 350px; background-color: #444; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; color: white; position: relative; }
         .hero::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.5); }
-        .hero-content { z-index: 2; text-align: center; padding: 20px; }
-
-        .container { max-width: 1000px; margin: auto; padding: 20px; }
-        .card { background: var(--grey); padding: 25px; border-radius: 15px; margin-bottom: 25px; border-right: 6px solid var(--gold); }
-
-        /* لوحة التحكم الاحترافية */
-        #adminArea { display: none; background: #fff; position: fixed; inset: 0; z-index: 1000; overflow-y: auto; padding: 25px; }
-        .admin-nav { display: flex; gap: 10px; overflow-x: auto; margin-bottom: 25px; padding-bottom: 10px; border-bottom: 2px solid var(--grey); }
-        .nav-link { padding: 12px 25px; background: var(--grey); border-radius: 30px; cursor: pointer; white-space: nowrap; font-weight: bold; }
-        .nav-link.active { background: var(--gold); color: white; }
-        
-        input, textarea, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; font-family: 'Cairo'; box-sizing: border-box; font-size: 1rem; }
-        .btn { background: var(--gold); color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; font-weight: bold; width: 100%; font-size: 1.1rem; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-        
-        .footer { background: var(--dark); color: #777; padding: 40px; text-align: center; margin-top: 50px; }
-        .admin-trigger { cursor: pointer; font-size: 1.5rem; color: var(--gold); }
+        .hero h1 { z-index: 2; font-size: 2rem; text-align: center; margin: 0; }
+        .container { max-width: 900px; margin: auto; padding: 20px; }
+        .card { background: var(--grey); padding: 20px; border-radius: 12px; margin-bottom: 20px; border-right: 5px solid var(--gold); }
+        #adminArea { display: none; background: #fff; position: fixed; inset: 0; z-index: 1000; overflow-y: auto; padding: 20px; }
+        input, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; font-family: 'Cairo'; box-sizing: border-box; }
+        .btn { background: var(--gold); color: white; border: none; padding: 15px; border-radius: 8px; width: 100%; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo-box">
-            <img id="displayLogo" src="https://i.ibb.co/pBTX7X6N/Screenshot-20251218-213058-Whats-App-Business.jpg" class="logo-img">
-            <div>
-                <strong id="displayNavTitle">جامعة الأقصى</strong>
-                <div style="font-size: 0.7rem; color: var(--gold);" id="displayNavSub">للعلوم والتكنولوجيا</div>
-            </div>
-        </div>
-        <div class="admin-trigger" onclick="openAdmin()">⚙️</div>
+        <strong>جامعة الأقصى</strong>
+        <span onclick="openAdmin()" style="cursor:pointer; font-size: 1.5rem;">⚙️</span>
     </header>
 
-    <div class="hero" id="heroBg" style="background-image: url('https://images.unsplash.com/photo-1541339907198-e08756ebafe3?auto=format&fit=crop&w=1350&q=80');">
-        <div class="hero-content">
-            <h1 id="displayMainTitle" style="font-size: 2.5rem; margin: 0;">جامعة الأقصى للعلوم والتكنولوجيا</h1>
-            <p id="displaySubTitle" style="font-size: 1.2rem;">نحو مستقبل أكاديمي متميز</p>
-        </div>
+    <div class="hero" id="heroBg" style="background-image: url('https://images.unsplash.com/photo-1541339907198-e08756ebafe3?w=1000');">
+        <h1 id="displayTitle">جامعة الأقصى للعلوم والتكنولوجيا</h1>
     </div>
 
     <div class="container">
         <div class="card">
-            <h2 style="color:var(--gold); margin-top:0;">الرؤية والرسالة</h2>
-            <p id="displayVision" style="line-height: 1.8;"></p>
+            <h3>الرؤية والرسالة</h3>
+            <p id="displayVision">الريادة في التعليم العالي والبحث العلمي لبناء مجتمع المعرفة وتلبية احتياجات التنمية المستدامة.</p>
         </div>
 
         <div class="card">
-            <h2 style="color:var(--gold); margin-top:0;">رئاسة الجامعة</h2>
-            <p><strong>المؤسس:</strong> <span id="displayFounder"></span></p>
-            <p><strong>رئيس الجامعة:</strong> <span id="displayPresident"></span></p>
-            <p><strong>الأمين العام:</strong> <span id="displaySecretary"></span></p>
+            <h3>رئاسة الجامعة</h3>
+            <p><strong>المؤسس:</strong> <span id="displayFounder">الأستاذ عادل علي مساعد</span></p>
+            <p><strong>رئيس الجامعة:</strong> <span id="displayPresident">الدكتور حمود القديمي</span></p>
         </div>
 
-        <h2 style="border-right: 5px solid var(--gold); padding-right: 15px; margin: 40px 0 20px;">آخر أخبار الجامعة</h2>
-        <div id="newsList" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;"></div>
+        <h2 style="border-right: 5px solid var(--gold); padding-right: 10px;">آخر الأخبار</h2>
+        <div id="newsList">
+            <p style="color:#888;">لا توجد أخبار منشورة حالياً.</p>
+        </div>
     </div>
 
-    <footer class="footer">
-        <div id="displayContact">
-            <p>واتساب: <span id="displayPhone"></span></p>
-            <p>العنوان: <span id="displayAddress">الجمهورية اليمنية</span></p>
-        </div>
-        <p style="font-size: 0.8rem; margin-top: 20px;">&copy; 2025 جامعة الأقصى - جميع الحقوق محفوظة</p>
-    </footer>
-
     <div id="adminArea">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px;">
-            <h2 style="margin:0; color:var(--gold);">مركز التحكم الشامل</h2>
-            <button onclick="closeAdmin()" style="background:#ff4757; color:white; border:none; padding:8px 20px; border-radius:8px; cursor:pointer;">إغلاق</button>
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h2>إدارة المحتوى</h2>
+            <button onclick="closeAdmin()" style="background:red; color:white; border:none; padding:5px 15px; border-radius:5px;">إغلاق</button>
         </div>
-
-        <div class="admin-nav">
-            <div class="nav-link active" onclick="showTab('tab1', this)">الواجهة والهوية</div>
-            <div class="nav-link" onclick="showTab('tab2', this)">عن الجامعة</div>
-            <div class="nav-link" onclick="showTab('tab3', this)">الأخبار</div>
-            <div class="nav-link" onclick="showTab('tab4', this)">التواصل</div>
-        </div>
-
-        <div id="tab1" class="tab-content active">
-            <label>اسم الجامعة في القائمة:</label>
-            <input type="text" id="setNavTitle">
-            <label>عنوان الواجهة الكبير:</label>
-            <input type="text" id="setMainTitle">
-            <label>شعار الجامعة (رفع مباشر):</label>
-            <input type="file" id="logoFile" accept="image/*">
-            <label>صورة الغلاف (الخلفية):</label>
-            <input type="file" id="heroFile" accept="image/*">
-            <button class="btn" onclick="saveTab1()">حفظ تغييرات الهوية</button>
-        </div>
-
-        <div id="tab2" class="tab-content">
-            <label>نص الرؤية والرسالة:</label>
-            <textarea id="setVision" rows="6"></textarea>
-            <label>اسم المؤسس:</label>
-            <input type="text" id="setFounder">
-            <label>رئيس الجامعة:</label>
-            <input type="text" id="setPresident">
-            <label>الأمين العام:</label>
-            <input type="text" id="setSecretary">
-            <button class="btn" onclick="saveTab2()">تحديث بيانات الجامعة</button>
-        </div>
-
-        <div id="tab3" class="tab-content">
-            <h4 style="color:var(--gold)">إضافة خبر جديد</h4>
-            <input type="text" id="newsT" placeholder="عنوان الخبر">
-            <textarea id="newsD" placeholder="تفاصيل الخبر"></textarea>
-            <input type="file" id="newsF" accept="image/*">
-            <button class="btn" style="background:#2ecc71" onclick="postNews()">نشر الخبر فوراً</button>
-            <hr>
-            <button class="btn" style="background:#e74c3c" onclick="clearNews()">حذف جميع الأخبار</button>
-        </div>
-
-        <div id="tab4" class="tab-content">
-            <label>رقم الواتساب (بالصيغة الدولية):</label>
-            <input type="text" id="setPhone" placeholder="+967...">
-            <label>العنوان الجغرافي:</label>
-            <input type="text" id="setAddress">
-            <button class="btn" onclick="saveTab4()">حفظ معلومات التواصل</button>
-        </div>
+        <hr>
+        <label>عنوان الموقع الرئيسي:</label>
+        <input type="text" id="editTitle">
+        <label>نص الرؤية:</label>
+        <textarea id="editVision" rows="4"></textarea>
+        <label>صورة الغلاف (رفع مباشر):</label>
+        <input type="file" id="fileHero" accept="image/*">
+        <button class="btn" onclick="saveData()">حفظ التعديلات</button>
+        
+        <hr>
+        <h3>نشر خبر جديد</h3>
+        <input type="text" id="newsTitle" placeholder="عنوان الخبر">
+        <textarea id="newsDesc" placeholder="تفاصيل الخبر"></textarea>
+        <input type="file" id="fileNews" accept="image/*">
+        <button class="btn" style="background:#27ae60" onclick="postNews()">نشر الخبر</button>
     </div>
 
     <script>
@@ -148,136 +80,66 @@
         };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
-        const imgbbKey = "6d84033e9d80c05a6396b27e4e08611a";
 
-        // الذكاء التأسيسي: زرع بيانات إذا كان الموقع فارغاً
-        function checkInit(data) {
-            if(!data) {
-                const initData = {
-                    navTitle: "جامعة الأقصى",
-                    mainTitle: "مرحباً بكم في جامعة الأقصى",
-                    vision: "الريادة في التعليم العالي والبحث العلمي لبناء مجتمع المعرفة.",
-                    founder: "الأستاذ عادل علي مساعد",
-                    president: "الدكتور حمود القديمي",
-                    secretary: "الدكتور خالد مساعد",
-                    phone: "+967781555637",
-                    address: "اليمن - صنعاء"
-                };
-                db.ref('SmartSite').set(initData);
-            }
-        }
-
-        // مزامنة البيانات المباشرة
-        db.ref('SmartSite').on('value', (snap) => {
+        // تحميل البيانات من Firebase إذا وجدت
+        db.ref('siteData').on('value', (snap) => {
             const data = snap.val();
-            checkInit(data);
             if(data) {
-                document.getElementById('displayNavTitle').innerText = data.navTitle || "";
-                document.getElementById('displayMainTitle').innerText = data.mainTitle || "";
-                document.getElementById('displayVision').innerText = data.vision || "";
-                document.getElementById('displayFounder').innerText = data.founder || "";
-                document.getElementById('displayPresident').innerText = data.president || "";
-                document.getElementById('displaySecretary').innerText = data.secretary || "";
-                document.getElementById('displayPhone').innerText = data.phone || "";
-                document.getElementById('displayAddress').innerText = data.address || "";
-                
-                if(data.logo) document.getElementById('displayLogo').src = data.logo;
+                if(data.title) {
+                    document.getElementById('displayTitle').innerText = data.title;
+                    document.getElementById('editTitle').value = data.title;
+                }
+                if(data.vision) {
+                    document.getElementById('displayVision').innerText = data.vision;
+                    document.getElementById('editVision').value = data.vision;
+                }
                 if(data.hero) document.getElementById('heroBg').style.backgroundImage = `url('${data.hero}')`;
-
-                // تعبئة اللوحة
-                document.getElementById('setNavTitle').value = data.navTitle || "";
-                document.getElementById('setMainTitle').value = data.mainTitle || "";
-                document.getElementById('setVision').value = data.vision || "";
-                document.getElementById('setFounder').value = data.founder || "";
-                document.getElementById('setPresident').value = data.president || "";
-                document.getElementById('setSecretary').value = data.secretary || "";
-                document.getElementById('setPhone').value = data.phone || "";
-                document.getElementById('setAddress').value = data.address || "";
             }
         });
 
-        // جلب الأخبار بنظام الكروت
+        // جلب الأخبار
         db.ref('news').on('value', (snap) => {
             let html = "";
             snap.forEach(child => {
                 const n = child.val();
-                html += `
-                <div class="card" style="padding:0; overflow:hidden;">
-                    <img src="${n.img}" style="width:100%; height:200px; object-fit:cover;">
-                    <div style="padding:15px;">
-                        <h3 style="color:var(--gold); margin:0 0 10px;">${n.title}</h3>
-                        <p style="font-size:0.9rem; margin:0;">${n.desc}</p>
-                    </div>
-                </div>`;
+                html += `<div class="card"><img src="${n.img}" style="width:100%; border-radius:8px;"><h3>${n.title}</h3><p>${n.desc}</p></div>`;
             });
-            document.getElementById('newsList').innerHTML = html;
+            if(html) document.getElementById('newsList').innerHTML = html;
         });
-
-        // دوال التحكم
-        function showTab(id, el) {
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            el.classList.add('active');
-        }
-
-        async function upload(file) {
-            const fd = new FormData(); fd.append("image", file);
-            const res = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {method:"POST", body:fd});
-            const j = await res.json(); return j.data.url;
-        }
 
         function openAdmin() { if(prompt("كلمة المرور:") === "sayhi1322") document.getElementById('adminArea').style.display='block'; }
         function closeAdmin() { document.getElementById('adminArea').style.display='none'; }
 
-        async function saveTab1() {
-            const navTitle = document.getElementById('setNavTitle').value;
-            const mainTitle = document.getElementById('setMainTitle').value;
-            const lFile = document.getElementById('logoFile').files[0];
-            const hFile = document.getElementById('heroFile').files[0];
-            
-            alert("جاري الحفظ والرفع...");
-            let logoUrl = null, heroUrl = null;
-            if(lFile) logoUrl = await upload(lFile);
-            if(hFile) heroUrl = await upload(hFile);
-
-            db.ref('SmartSite').update({ 
-                navTitle, mainTitle,
-                ...(logoUrl && {logo: logoUrl}),
-                ...(heroUrl && {hero: heroUrl})
-            });
-            alert("تم التحديث بنجاح!");
+        async function uploadImg(file) {
+            const fd = new FormData(); fd.append("image", file);
+            const res = await fetch("https://api.imgbb.com/1/upload?key=6d84033e9d80c05a6396b27e4e08611a", {method:"POST", body:fd});
+            const j = await res.json(); return j.data.url;
         }
 
-        function saveTab2() {
-            db.ref('SmartSite').update({
-                vision: document.getElementById('setVision').value,
-                founder: document.getElementById('setFounder').value,
-                president: document.getElementById('setPresident').value,
-                secretary: document.getElementById('setSecretary').value
+        async function saveData() {
+            const title = document.getElementById('editTitle').value;
+            const vision = document.getElementById('editVision').value;
+            const file = document.getElementById('fileHero').files[0];
+            let url = null;
+            if(file) url = await uploadImg(file);
+            
+            db.ref('siteData').update({
+                title: title,
+                vision: vision,
+                ...(url && {hero: url})
             });
-            alert("تم تحديث بيانات القيادة!");
+            alert("تم التحديث!");
         }
 
         async function postNews() {
-            const title = document.getElementById('newsT').value;
-            const desc = document.getElementById('newsD').value;
-            const file = document.getElementById('newsF').files[0];
+            const title = document.getElementById('newsTitle').value;
+            const desc = document.getElementById('newsDesc').value;
+            const file = document.getElementById('fileNews').files[0];
             if(!file) return alert("اختر صورة للخبر");
-            const img = await upload(file);
+            const img = await uploadImg(file);
             db.ref('news').push({ title, desc, img });
-            alert("نُشر الخبر!");
+            alert("تم النشر!");
         }
-
-        function saveTab4() {
-            db.ref('SmartSite').update({
-                phone: document.getElementById('setPhone').value,
-                address: document.getElementById('setAddress').value
-            });
-            alert("تم حفظ معلومات التواصل!");
-        }
-
-        function clearNews() { if(confirm("هل تريد حذف كل الأخبار؟")) db.ref('news').remove(); }
     </script>
 </body>
 </html>
