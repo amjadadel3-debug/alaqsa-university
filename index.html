@@ -1,578 +1,325 @@
 <!DOCTYPE html>
-
 <html lang="ar" dir="rtl">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جامعة الأقصى للعلوم والتكنولوجيا</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&family=Tajawal:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Tajawal', sans-serif; background-color: #000; color: #fff; line-height: 1.6; overflow-x: hidden; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-  <meta charset="UTF-8">
+/* Navbar */
+.navbar { background: #000; border-bottom: 2px solid #ca8a04; padding: 15px 5%; position: sticky; top: 0; z-index: 1000; }
+.nav-container { display: flex; justify-content: space-between; align-items: center; }
+.logo-section { display: flex; align-items: center; gap: 12px; }
+.logo-img, .footer-logo { height: 80px; width: auto; display: block; }
+.uni-name { font-family: 'Cairo', sans-serif; font-weight: 900; font-size: 1.1rem; }
+.menu-btn { background: #ca8a04; color: #000; border: none; padding: 10px 20px; border-radius: 10px; font-weight: 900; cursor: pointer; }
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+/* Sidebar Menu */
+.side-menu { position: fixed; top: 0; right: -100%; width: 320px; height: 100%; background: #0f172a; z-index: 2000; transition: 0.5s; padding: 30px; overflow-y: auto; box-shadow: -10px 0 30px #000; }
+.side-menu.active { right: 0; }
+.menu-header { text-align: center; border-bottom: 1px solid #334155; padding-bottom: 20px; margin-bottom: 20px; }
+.close-btn { background: none; border: 1px solid #ca8a04; color: #ca8a04; padding: 5px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; float: right; }
+.menu-logo { height: 80px; margin-top: 10px; }
+.menu-links { list-style: none; clear: both; }
+.menu-links li { margin-bottom: 5px; }
+.menu-links a, .submenu-toggle { display: block; color: #fff; text-decoration: none; font-size: 1.1rem; font-weight: 700; padding: 12px; border-radius: 8px; width: 100%; text-align: right; background: none; border: none; cursor: pointer; }
+.submenu { display: none; list-style: none; padding-right: 20px; border-right: 2px solid #ca8a04; }
+.has-submenu.open .submenu { display: block; }
+.menu-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: none; z-index: 1500; }
+.menu-overlay.active { display: block; }
 
-  <title>جامعة الأقصى للعلوم والتكنولوجيا</title>
+/* Hero Section */
+.hero { position: relative; height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; background: url('https://raw.githubusercontent.com/aqsa-un/.net/refs/heads/main/1766160658725.jpg') center/cover no-repeat; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent, #000); }
+.main-title { font-family: 'Cairo', sans-serif; font-size: 3rem; font-weight: 900; z-index: 1; }
+.highlight { color: #ca8a04; }
+.slogan-badge { border: 2px solid #ca8a04; padding: 10px 30px; border-radius: 50px; background: rgba(0,0,0,0.7); margin-top: 20px; display: inline-block; z-index: 1; }
 
-  <script src="https://cdn.tailwindcss.com"></script>
+/* News Ticker */
+.news-ticker { background: #ca8a04; color: #000; overflow: hidden; white-space: nowrap; padding: 10px 0; font-weight: 700; }
+.news-ticker .news-container { display: inline-block; padding-left: 100%; animation: ticker 15s linear infinite; }
+@keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+/* Features Section */
+.features-section { padding: 60px 0; background: #000; }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+.feature-card { background: #0b0b0b; border-radius: 20px; padding: 40px 25px; text-align: center; border: 1px solid #1f1f1f; }
+.feature-card i { font-size: 48px; color: #ca8a04; margin-bottom: 20px; }
+.feature-card h3 { font-family: 'Cairo', sans-serif; font-size: 1.5rem; margin-bottom: 15px; }
+.feature-card p { color: #ccc; font-size: 1rem; line-height: 1.8; }
 
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&family=Tajawal:wght@500;700;900&display=swap');
+/* Leadership Section */
+.leadership { padding: 60px 0; background: #050505; }
+.leadership .management-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+.leadership .admin-card img { width: 100px; height: 100px; border-radius: 50%; border: 3px solid #ca8a04; margin-bottom: 10px; }
 
-    body {
-      font-family: 'Tajawal', sans-serif;
-      scroll-behavior: smooth;
-      font-weight: 500;
-      overflow-x: hidden;
-    }
+/* Slider Section */
+.image-slider { padding: 60px 0; background: #000; }
+.slider-container { position: relative; max-width: 900px; margin: auto; overflow: hidden; border-radius: 20px; border: 3px solid #ca8a04; }
+.slider-container img { width: 100%; display: none; }
+.slider-container img.active { display: block; }
 
-    .uni-title {
-      font-family: 'Cairo', sans-serif;
-      font-weight: 900;
-    }
+/* Full-page overlays */
+.full-page-overlay { position: fixed; inset: 0; background: #000; z-index: 3000; display: none; overflow-y: auto; padding: 50px 5%; }
+.section-title { font-family: 'Cairo', sans-serif; color: #ca8a04; font-size: 2rem; border-right: 5px solid #ca8a04; padding-right: 15px; margin: 30px 0; }
+.info-card { background: #111; padding: 25px; border-radius: 15px; border: 1px solid #333; margin-bottom: 20px; }
 
-    @keyframes logo-pulse {
+/* Facebook Section */
+.facebook-section { padding: 60px 0; background: #0a0a0a; text-align: center; display: block; }
+.facebook-section h2 { font-family: 'Cairo', sans-serif; color: #ca8a04; font-size: 2rem; margin-bottom: 30px; border-right: 5px solid #ca8a04; padding-right: 15px; display: inline-block; }
+.facebook-section iframe { display: block; margin: 0 auto; width: 100%; max-width: 500px; min-width: 320px; height: 600px; border:none; overflow:hidden; border-radius: 20px; }
 
-      0%,
-      100% {
-        transform: scale(1);
-        filter: drop-shadow(0 0 5px rgba(218, 165, 32, 0.4));
-      }
+/* Footer */
+.footer { padding: 60px 0 20px; border-top: 5px solid #ca8a04; text-align: center; }
+.social-links { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; }
+.btn { padding: 12px 25px; border-radius: 12px; text-decoration: none; color: #fff; font-weight: 900; }
+.whatsapp-btn { background: #16a34a; }
+.facebook-btn { background: #2563eb; }
 
-      50% {
-        transform: scale(1.05);
-        filter: drop-shadow(0 0 15px rgba(218, 165, 32, 0.6));
-      }
-    }
-
-    .logo-pulsing {
-      animation: logo-pulse 3s infinite ease-in-out;
-    }
-
-    .admin-sidebar {
-      transform: translateX(100%);
-      transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: 350px;
-      background: #0f172a;
-      color: white;
-      z-index: 2000;
-      padding: 25px;
-      height: 100vh;
-      overflow-y: auto;
-      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
-    }
-
-    .admin-sidebar.active {
-      transform: translateX(0);
-    }
-
-    .leader-img {
-      width: 75px;
-      height: 75px;
-      border-radius: 18px;
-      object-fit: cover;
-      border: 3px solid #ca8a04;
-      transition: 0.3s;
-    }
-
-    #facultyPage {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: white;
-      z-index: 1000;
-      overflow-y: auto;
-      padding-top: 80px;
-    }
-
-    .faculty-card {
-      background: #f8fafc;
-      border-radius: 25px;
-      padding: 25px;
-      border: 1px solid #e2e8f0;
-      transition: 0.3s;
-      text-align: center;
-    }
-
-    .news-ticker {
-      background: #ca8a04;
-      color: black;
-      padding: 12px 0;
-      overflow: hidden;
-      position: relative;
-      font-weight: 900;
-      border-bottom: 4px solid black;
-    }
-
-    .news-content {
-      display: inline-block;
-      white-space: nowrap;
-      animation: ticker 30s linear infinite;
-      font-size: 1.1rem;
-    }
-
-    @keyframes ticker {
-      0% {
-        transform: translateX(-100%);
-      }
-
-      100% {
-        transform: translateX(100%);
-      }
-    }
-
-    .hero-text-shadow {
-      text-shadow: 0 4px 20px rgba(0, 0, 0, 1), 0 0 40px rgba(202, 138, 4, 0.6);
-    }
-
-    /* الحل الجذري والنهائي للفيسبوك */
-    .fb-outer-wrapper {
-      width: 100%;
-      max-width: 500px;
-      margin: 0 auto;
-      overflow: hidden;
-      border: 8px solid #ca8a04;
-      border-radius: 40px;
-      background: white;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    }
-
-    .fb-inner-container {
-      width: 500px;
-      /* فرض عرض كافٍ للفيسبوك */
-      position: relative;
-    }
-
-    @media (max-width: 540px) {
-
-      /* تصغير الصندوق بالكامل ليناسب شاشة الجوال مهما كان عرضه */
-      .fb-inner-container {
-        transform: scale(0.8);
-        transform-origin: top right;
-        margin-right: -10%;
-        /* سحب المحتوى لليمين لتعويض الفراغ */
-      }
-
-      .fb-outer-wrapper {
-        height: 480px;
-        /* تقليل الارتفاع ليناسب التصغير */
-        border-width: 4px;
-        border-radius: 25px;
-      }
-    }
-
-    @media (max-width: 400px) {
-      .fb-inner-container {
-        transform: scale(0.7);
-        margin-right: -15%;
-      }
-
-      .fb-outer-wrapper {
-        height: 420px;
-      }
-    }
-  </style>
-
+/* Responsive */
+@media (max-width: 768px) {
+.uni-name { display: none; }
+.main-title { font-size: 2rem; }
+.logo-img { height: 60px; }
+.slider-container img { height: auto; }
+.facebook-section iframe { height: 500px; }
+}
+</style>
 </head>
-
-<body class="bg-gray-50 text-gray-900 text-right">
-
-  <div id="adminPanel" class="admin-sidebar">
-
-    <div class="flex justify-between items-center mb-6 border-b border-slate-700 pb-4">
-
-      <h2 class="text-xl font-bold text-yellow-500 italic">إدارة المحتوى</h2>
-
-      <button onclick="toggleAdmin()" class="text-white text-3xl hover:text-red-500">&times;</button>
-
-    </div>
-
-    <div class="space-y-4">
-
-      <div><label class="text-[10px] text-gray-400 block">رابط الشعار</label><input type="text" id="in-logo" class="w-full bg-slate-700 p-2 rounded text-xs"></div>
-
-      <div class="bg-slate-800 p-3 rounded-xl space-y-2">
-
-        <p class="text-yellow-500 text-[10px] font-bold italic">روابط صور القيادة</p>
-
-        <input type="text" id="in-img-founder" placeholder="صورة رئيس المجلس" class="w-full bg-slate-700 p-1 rounded text-xs">
-
-        <input type="text" id="in-img-rector" placeholder="صورة رئيس الجامعة" class="w-full bg-slate-700 p-1 rounded text-xs">
-
-        <input type="text" id="in-img-sec" placeholder="صورة الأمين العام" class="w-full bg-slate-700 p-1 rounded text-xs">
-
-      </div>
-
-      <div><label class="text-[10px] text-gray-400">رقم الواتساب</label><input type="text" id="in-phone" class="w-full bg-slate-700 p-2 rounded text-xs"></div>
-
-      <div><label class="text-[10px] text-gray-400">العنوان الكامل</label><textarea id="in-address" rows="3" class="w-full bg-slate-700 p-2 rounded text-xs"></textarea></div>
-
-      <button onclick="saveAndExit()" class="w-full bg-yellow-600 text-black font-black py-4 rounded-xl hover:bg-yellow-500 shadow-lg">حفظ التغييرات</button>
-
-    </div>
-
-  </div>
-
-  <nav class="bg-black text-white py-3 px-6 flex justify-between items-center sticky top-0 z-[1100] border-b border-yellow-600 shadow-2xl">
-
-    <div class="flex items-center gap-4 cursor-pointer" onclick="closeFacultyPage()">
-
-      <img id="out-logo" src="" class="h-16 md:h-24 object-contain logo-pulsing scale-110">
-
-      <h1 class="uni-title text-lg md:text-xl font-black hidden md:block">جامعة الأقصى للعلوم والتكنولوجيا</h1>
-
-    </div>
-
-    <div class="flex gap-4 items-center">
-
-      <div class="hidden lg:flex gap-6 font-bold text-sm">
-
-        <a href="#home" onclick="closeFacultyPage()" class="hover:text-yellow-500 transition">الرئيسية</a>
-
-        <a href="javascript:void(0)" onclick="openFacultyPage()" class="hover:text-yellow-500 transition">هيئة التدريس</a>
-
-        <a href="#faculties" onclick="closeFacultyPage()" class="hover:text-yellow-500 transition">الكليات</a>
-
-      </div>
-
-      <button onclick="showLogin()" id="loginBtn" class="bg-yellow-600 text-black px-5 py-2 rounded-xl font-bold text-xs hover:bg-yellow-500 transition">دخول</button>
-
-      <button onclick="toggleAdmin()" id="adminTools" class="bg-green-600 text-white px-5 py-2 rounded-xl hidden text-xs font-bold items-center gap-2"><i class="fas fa-cog"></i> الإدارة</button>
-
-    </div>
-
-  </nav>
-
-  <div class="news-ticker">
-    <div class="news-content">⚡ يبدأ التسجيل للفصل الدراسي الجديد في جميع الكليات الطبية والإدارية ⚡ نرحب بالطلاب المستجدين في رحاب جامعة الأقصى ⚡ تمنياتنا لطلابنا بالتوفيق والنجاح ⚡</div>
-  </div>
-
-  <div id="mainContent">
-
-    <header id="home" class="relative h-[650px] bg-slate-900 flex items-center justify-center text-center overflow-hidden">
-
-      <img src="https://raw.githubusercontent.com/aqsa-un/.net/refs/heads/main/1766160658725.jpg" class="absolute inset-0 w-full h-full object-cover opacity-60 scale-105">
-
-      <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80"></div>
-
-      <div class="relative z-10 px-4">
-
-        <h1 class="uni-title text-5xl md:text-8xl font-black text-white mb-16 italic hero-text-shadow leading-tight">جامعة الأقصى <br> <span class="text-yellow-600">للعلوم والتكنولوجيا</span></h1>
-
-        <div class="mt-12">
-
-          <p class="text-xl md:text-3xl text-gray-100 font-bold bg-black/70 inline-block px-12 py-5 rounded-full border-2 border-yellow-600 shadow-2xl backdrop-blur-md">نصنع القادة لبناء المستقبل</p>
-
-        </div>
-
-      </div>
-
-    </header>
-
-    <section id="about" class="py-24 container mx-auto px-4 grid lg:grid-cols-2 gap-20">
-
-      <div class="space-y-10">
-
-        <h3 class="uni-title text-5xl font-black border-r-8 border-yellow-600 pr-6 italic">من نحن؟</h3>
-
-        <p id="out-about-text" class="text-gray-800 leading-relaxed text-2xl font-bold text-justify"></p>
-
-        <div class="p-10 bg-yellow-600 rounded-[40px] shadow-2xl text-black cursor-pointer hover:bg-black hover:text-white transition group" onclick="openFacultyPage()">
-          <h4 class="text-3xl font-black mb-2 italic"><i class="fas fa-graduation-cap"></i> هيئة التدريس</h4>
-          <p class="font-black text-lg">نخبة الكوادر الأكاديمية.. اضغط للتفاصيل.</p>
-        </div>
-
-      </div>
-
-      <div class="bg-white p-12 rounded-[50px] shadow-2xl border-2 border-gray-100 h-fit lg:sticky lg:top-32">
-
-        <h4 class="uni-title font-black text-yellow-700 mb-10 border-b-4 border-yellow-600 pb-4 text-3xl italic text-center">قيادة الجامعة</h4>
-
-        <ul class="space-y-10">
-
-          <li class="flex items-center gap-6 p-6 rounded-3xl border-b-2 border-gray-50"><img id="out-img-founder" src="" class="leader-img shadow-xl">
-            <div>
-              <p class="text-sm text-gray-500 font-black mb-1">رئيس مجلس الأمناء</p><strong id="out-founder" class="text-2xl text-black font-black"></strong>
-            </div>
-          </li>
-
-          <li class="flex items-center gap-6 p-6 rounded-3xl border-b-2 border-gray-50"><img id="out-img-rector" src="" class="leader-img shadow-xl">
-            <div>
-              <p class="text-sm text-gray-500 font-black mb-1">رئيس الجامعة</p><strong id="out-rector" class="text-2xl text-black font-black"></strong>
-            </div>
-          </li>
-
-          <li class="flex items-center gap-6 p-6 rounded-3xl"><img id="out-img-sec" src="" class="leader-img shadow-xl">
-            <div>
-              <p class="text-sm text-gray-500 font-black mb-1">الأمين العام</p><strong id="out-sec" class="text-2xl text-black font-black"></strong>
-            </div>
-          </li>
-
-        </ul>
-
-      </div>
-
-    </section>
-
-    <section id="faculties" class="py-24 bg-gray-100">
-
-      <div class="container mx-auto px-4 text-center">
-
-        <h3 class="uni-title text-4xl font-black mb-16 italic border-b-4 border-yellow-600 w-fit mx-auto pb-2">كلياتنا وتخصصاتنا</h3>
-
-        <div class="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-
-          <div class="bg-white rounded-[50px] p-12 shadow-2xl border-t-[12px] border-red-700 transform hover:scale-105 transition-all duration-500">
-
-            <i class="fas fa-stethoscope text-7xl text-red-700 mb-6"></i>
-
-            <h4 class="text-3xl font-black mb-6">كلية العلوم الطبية</h4>
-
-            <p class="font-black text-red-700 text-2xl italic bg-red-50 py-4 rounded-3xl shadow-inner">صيدلة - تمريض - قبالة</p>
-
-          </div>
-
-          <div class="bg-white rounded-[50px] p-12 shadow-2xl border-t-[12px] border-yellow-600 transform hover:scale-105 transition-all duration-500">
-
-            <i class="fas fa-chart-line text-7xl text-yellow-600 mb-6"></i>
-
-            <h4 class="text-3xl font-black mb-6">كلية العلوم الإدارية و الإنسانية</h4>
-
-            <p class="font-black text-yellow-700 text-2xl italic bg-yellow-50 py-4 rounded-3xl shadow-inner">إدارة - محاسبة - نظم معلومات - شريعةوقانون</p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <section class="py-24 bg-white">
-
-      <div class="container mx-auto px-4 max-w-5xl">
-
-        <div class="bg-slate-900 rounded-[70px] p-12 shadow-2xl border-4 border-yellow-600 flex flex-col md:flex-row gap-12 items-center">
-
-          <div class="md:w-1/3 text-center text-white">
-
-            <div class="w-28 h-28 bg-yellow-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl"><i class="fas fa-comments text-5xl text-black"></i></div>
-
-            <h4 class="text-3xl font-black italic">تواصل معنا</h4>
-
-            <p class="text-gray-400 font-bold mt-3 text-lg"> للرد عبر الواتساب.</p>
-
-          </div>
-
-          <div class="md:w-2/3 w-full space-y-5">
-
-            <input type="text" id="v-name" placeholder="ما هو اسمك الكريم؟" class="w-full bg-slate-800 text-white p-6 rounded-3xl outline-none border-2 border-transparent focus:border-yellow-600 font-bold text-lg">
-
-            <textarea id="v-msg" rows="3" placeholder="كيف يمكننا مساعدتك؟" class="w-full bg-slate-800 text-white p-6 rounded-3xl outline-none border-2 border-transparent focus:border-yellow-600 font-bold text-lg"></textarea>
-
-            <button onclick="send()" class="w-full bg-green-600 hover:bg-green-700 text-white font-black py-6 rounded-3xl text-2xl flex items-center justify-center gap-4 transition-all shadow-lg active:scale-95">
-
-              <i class="fab fa-whatsapp text-4xl"></i> إرسال الآن
-
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <section class="py-16 bg-white overflow-hidden">
-
-      <div class="container mx-auto px-4">
-
-        <div class="fb-outer-wrapper">
-
-          <div style="width: 100%; max-width: 500px; height: 600px; border-radius: 25px; overflow: hidden; border: 6px solid #ca8a04; background: white; margin: 20px auto; position: relative;">
-
-            <div style="background: #ca8a04; color: black; padding: 10px; text-align: center; font-weight: 900; font-family: 'Cairo', sans-serif; font-size: 14px;">
-
-              صفحة جامعة الأقصى الرسمية
-
-            </div>
-
-            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D61579917951873&tabs=timeline&width=350&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true" style="width: 100%; height: 550px; border: none; overflow: hidden;" scrolling="yes" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-
-            </iframe>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <footer class="py-20 bg-black text-white border-t-[10px] border-yellow-600">
-
-      <div class="container mx-auto px-6 text-center">
-
-        <div class="mb-12">
-
-          <img id="footer-logo" src="" class="h-28 mx-auto mb-6 opacity-90 drop-shadow-xl">
-
-          <p id="out-address" class="text-xl text-gray-300 max-w-4xl mx-auto font-bold leading-relaxed italic"></p>
-
-        </div>
-
-        <div class="flex justify-center gap-8 flex-wrap mb-16">
-
-          <a id="out-phone-link" href="#" class="bg-green-600 px-12 py-5 rounded-3xl font-black flex items-center gap-4 hover:bg-green-700 transition shadow-2xl text-xl"><i class="fab fa-whatsapp text-3xl"></i> واتساب</a>
-
-          <a id="out-fb-link" href="#" class="bg-blue-600 px-12 py-5 rounded-3xl font-black flex items-center gap-4 hover:bg-blue-700 transition shadow-2xl text-xl"><i class="fab fa-facebook text-3xl"></i> فيسبوك</a>
-
-        </div>
-
-        <p class="text-gray-500 font-black italic text-sm tracking-widest border-t border-white/10 pt-10">&copy; تصميم م/امجد مساعد 2025 جامعة الأقصى للعلوم والتكنولوجيا</p>
-
-      </div>
-
-    </footer>
-
-  </div>
-
-  <div id="facultyPage">
-
-    <div class="container mx-auto px-6 pb-24">
-
-      <div class="flex justify-between items-center mb-16 border-b-8 border-yellow-600 pb-8">
-
-        <h2 class="uni-title text-4xl md:text-6xl font-black text-black italic">نخبة الكادر الأكاديمي</h2>
-
-        <button onclick="closeFacultyPage()" class="bg-black text-white px-10 py-4 rounded-2xl font-black hover:bg-red-700 transition shadow-2xl text-xl">إغلاق</button>
-
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
-
-        <div class="faculty-card group">
-
-          <img src="https://via.placeholder.com/150" class="w-40 h-40 rounded-[40px] mx-auto mb-6 border-4 border-yellow-600 shadow-2xl group-hover:rotate-12 transition-all duration-500 object-cover">
-
-          <h4 class="text-3xl font-black mb-2">قريباً..</h4>
-
-          <p class="text-yellow-700 font-black text-xl italic mb-3">دكتوراه - العلوم الطبية</p>
-
-        </div>
-
-        <div class="faculty-card group">
-
-          <img src="https://via.placeholder.com/150" class="w-40 h-40 rounded-[40px] mx-auto mb-6 border-4 border-yellow-600 shadow-2xl group-hover:rotate-12 transition-all duration-500 object-cover">
-
-          <h4 class="text-3xl font-black mb-2">قريباً..</h4>
-
-          <p class="text-yellow-700 font-black text-xl italic mb-3">ماجستير - العلوم الإدارية</p>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <script>
-    const MASTER_PASS = "sayhi1322";
-    const defaultData = {
-      logo: "https://raw.githubusercontent.com/alaqsa-university-ye/alaqsa-university/refs/heads/main/Screenshot_%D9%A2%D9%A0%D9%A2%D9%A5%D9%A1%D9%A2%D9%A1%D9%A9_%D9%A1%D9%A5%D9%A2%D9%A2%D9%A0%D9%A0_Google.jpg",
-      fbUrl: "https://www.facebook.com/profile.php?id=61579917951873",
-      founder: "الأستاذ عادل علي مساعد",
-      rector: "الدكتور حمود القديمي",
-      sec: "الدكتور خالد مساعد",
-      imgFounder: "https://via.placeholder.com/150",
-      imgRector: "https://via.placeholder.com/150",
-      imgSec: "https://via.placeholder.com/150",
-      phone: "967781555637",
-      address: "الجمهورية اليمنية - صنعاء - الحتارش - شارع الجامعة - بعد أسواق اليمن السعيد",
-      aboutText: "تعد جامعة الأقصى للعلوم والتكنولوجيا صرحاً تعليمياً ريادياً، تجمع بين الحداثة التكنولوجية والأصالة العلمية لخدمة المجتمع اليمني."
-    };
-
-    function openFacultyPage() {
-      document.getElementById('mainContent').style.display = 'none';
-      document.getElementById('facultyPage').style.display = 'block';
-      window.scrollTo(0, 0);
-    }
-
-    function closeFacultyPage() {
-      document.getElementById('facultyPage').style.display = 'none';
-      document.getElementById('mainContent').style.display = 'block';
-    }
-
-    function send() {
-      const s = JSON.parse(localStorage.getItem('aqsa_v20')) || defaultData;
-      const n = document.getElementById('v-name').value;
-      const m = document.getElementById('v-msg').value;
-      if (!n || !m) return alert("أكمل البيانات");
-      window.open(`https://wa.me/${s.phone}?text=استفسار من: ${n}%0Aالرسالة: ${m}`, '_blank');
-    }
-
-    function applyData() {
-      const s = JSON.parse(localStorage.getItem('aqsa_v20')) || defaultData;
-      document.getElementById('out-logo').src = s.logo;
-      document.getElementById('footer-logo').src = s.logo;
-      document.getElementById('out-founder').innerText = s.founder;
-      document.getElementById('out-rector').innerText = s.rector;
-      document.getElementById('out-sec').innerText = s.sec;
-      document.getElementById('out-img-founder').src = s.imgFounder || defaultData.imgFounder;
-      document.getElementById('out-img-rector').src = s.imgRector || defaultData.imgRector;
-      document.getElementById('out-img-sec').src = s.imgSec || defaultData.imgSec;
-      document.getElementById('out-address').innerText = s.address;
-      document.getElementById('out-about-text').innerText = s.aboutText;
-      document.getElementById('out-phone-link').href = `https://wa.me/${s.phone}`;
-      document.getElementById('out-fb-link').href = s.fbUrl;
-      document.getElementById('in-logo').value = s.logo;
-      document.getElementById('in-phone').value = s.phone;
-      document.getElementById('in-address').value = s.address;
-      document.getElementById('in-img-founder').value = s.imgFounder;
-      document.getElementById('in-img-rector').value = s.imgRector;
-      document.getElementById('in-img-sec').value = s.imgSec;
-    }
-
-    function saveAndExit() {
-      const d = {
-        ...defaultData,
-        logo: document.getElementById('in-logo').value,
-        phone: document.getElementById('in-phone').value,
-        address: document.getElementById('in-address').value,
-        imgFounder: document.getElementById('in-img-founder').value,
-        imgRector: document.getElementById('in-img-rector').value,
-        imgSec: document.getElementById('in-img-sec').value
-      };
-      localStorage.setItem('aqsa_v20', JSON.stringify(d));
-      localStorage.removeItem('adm_v20');
-      location.reload();
-    }
-
-    function showLogin() {
-      if (prompt("الباسورد:") === MASTER_PASS) {
-        localStorage.setItem('adm_v20', '1');
-        location.reload();
-      }
-    }
-
-    function toggleAdmin() {
-      document.getElementById('adminPanel').classList.toggle('active');
-    }
-    window.onload = () => {
-      applyData();
-      if (localStorage.getItem('adm_v20')) {
-        document.getElementById('adminTools').classList.remove('hidden');
-        document.getElementById('loginBtn').classList.add('hidden');
-      }
-    };
-  </script>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+<div class="nav-container">
+<div class="logo-section">
+<img src="https://raw.githubusercontent.com/aqsa-un/.net/refs/heads/main/IMG-20251220-WA0030.png" class="logo-img" alt="شعار الجامعة">
+<span class="uni-name">جامعة الأقصى للعلوم والتكنولوجيا</span>
+</div>
+<button class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i> قائمة</button>
+</div>
+</nav>
+
+<!-- Sidebar Menu -->
+<div id="sideMenu" class="side-menu">
+<div class="menu-header">
+<button class="close-btn" onclick="toggleMenu()">&times; إغلاق</button>
+<img src="https://raw.githubusercontent.com/aqsa-un/.net/refs/heads/main/IMG-20251220-WA0030.png" alt="Logo" class="menu-logo">
+</div>
+<ul class="menu-links">
+<li><a href="#" onclick="toggleMenu()">الرئيسية</a></li>
+<li class="has-submenu">
+<button class="submenu-toggle">عن الجامعة <i class="fas fa-chevron-down"></i></button>
+<ul class="submenu">
+<li><a href="javascript:void(0)" onclick="openPage('aboutSection')">نبذة والرسالة</a></li>
+<li><a href="javascript:void(0)" onclick="openPage('aboutSection')">إدارة الجامعة</a></li>
+</ul>
+</li>
+<li class="has-submenu">
+<button class="submenu-toggle">الكليات <i class="fas fa-chevron-down"></i></button>
+<ul class="submenu">
+<li><a href="javascript:void(0)" onclick="openPage('facultiesSection')">العلوم الطبية</a></li>
+<li><a href="javascript:void(0)" onclick="openPage('facultiesSection')">العلوم الإدارية والإنسانية</a></li>
+</ul>
+</li>
+<li><a href="javascript:void(0)" onclick="openPage('admissionSection')">القبول والتسجيل</a></li>
+<li><a href="#">الأخبار والإعلانات</a></li>
+<li><a href="javascript:void(0)" onclick="scrollToFooter()">تواصل معنا</a></li>
+</ul>
+</div>
+<div id="menuOverlay" class="menu-overlay" onclick="toggleMenu()"></div>
+
+<!-- News Ticker -->
+<div class="news-ticker">
+<div class="news-container">أخبار الجامعة: تم افتتاح كلية العلوم الإدارية بنجاح للعام الدراسي 2026!</div>
+</div>
+
+<!-- Hero Section -->
+<header class="hero">
+<div class="hero-overlay"></div>
+<h1 class="main-title">جامعة الأقصى <span class="highlight">للعلوم والتكنولوجيا</span></h1>
+<div class="slogan-badge">نصنع القادة لبناء المستقبل</div>
+</header>
+
+<!-- Features Section -->
+<section class="features-section">
+<div class="container">
+<div class="features-grid">
+<div class="feature-card">
+<i class="fas fa-user-graduate"></i>
+<h3>التميز المهني</h3>
+<p>تجهيز الطلاب للمنافسة العالمية في سوق العمل.</p>
+</div>
+<div class="feature-card">
+<i class="fas fa-microscope"></i>
+<h3>الابتكار والبحث</h3>
+<p>تشجيع البحث العلمي والابتكار التقني المستمر.</p>
+</div>
+<div class="feature-card">
+<i class="fas fa-award"></i>
+<h3>الجودة الأكاديمية</h3>
+<p>معايير تعليمية متطورة تضمن كفاءة الخريج.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Leadership Section -->
+<section class="leadership">
+<div class="container">
+<h2 class="section-title">قيادة الجامعة</h2>
+<div class="management-grid">
+<div class="admin-card">
+<img src="https://raw.githubusercontent.com/aqsa-un/.net/refs/heads/main/IMG-20251220-WA0001(1).jpg" alt="المؤسس">
+<h4>الأستاذ / عادل علي مساعد</h4>
+<span>رئيس مجلس الأمناء</span>
+</div>
+<div class="admin-card">
+<img src="https://raw.githubusercontent.com/aqsa-un/.net/refs/heads/main/%D8%B1%D8%A6%D9%8A%D8%B3%20%D8%A7%D9%84%D8%AC%D8%A7%D9%85%D8%B9%D8%A9.jpg" alt="رئيس الجامعة">
+<h4>الدكتور / حمود القديمي</h4>
+<span>رئيس الجامعة</span>
+</div>
+<div class="admin-card">
+<img src="https://via.placeholder.com/150" alt="الأمين العام">
+<h4>الدكتور / خالد مساعد</h4>
+<span>الأمين العام</span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Image Slider Section -->
+<section class="image-slider">
+<div class="container">
+<div class="slider-container">
+<img src="https://raw.githubusercontent.com/aqsa-un/.net/refs/heads/main/%D9%85%D9%83%D8%AA%D8%A8%D8%A9%D9%85%D8%AA%D9%83%D8%A7%D9%85%D9%84%D9%87.jpg" class="active" alt="صورة 1">
+<img src="https://raw.githubusercontent.com/aqsa-un/.net/refs/heads/main/%D9%85%D8%B9%D8%A7%D9%85%D9%84%20%D8%B7%D8%A8%D9%8A%D8%A9.jpg" alt="صورة 2">
+<img src="https://raw.githubusercontent.com/aqsa-un/.net/refs/heads/main/%D9%85%D8%AC%D8%B3%D9%85%D8%A7%D8%AA%20%D9%84%D8%AC%D8%B3%D9%85%20%D8%A7%D9%84%D8%A5%D9%86%D8%B3%D8%A7%D9%86.jpg" alt="صورة 3">
+<img src="https://raw.githubusercontent.com/aqsa-un/.net/refs/heads/main/%D9%82%D8%A7%D8%B9%D8%A7%D8%AA%20%D9%88%D8%A7%D8%B3%D8%B9%D9%87.jpg" alt="صورة 4">
+<img src="https://raw.githubusercontent.com/aqsa-un/.net/refs/heads/main/%D8%AF%D9%85%D9%89%20%D8%B7%D8%A8%D9%8A%D8%A9%20%D8%AD%D8%AF%D9%8A%D8%AB%D8%A9.jpg" alt="صورة 5">
+<img src="https://raw.githubusercontent.com/aqsa-un/.net/refs/heads/main/%D8%A3%D8%AC%D9%87%D8%B2%D9%87%20%D8%AD%D8%AF%D9%8A%D8%AB%D9%87.jpg" alt="صورة 6">
+</div>
+</div>
+</section>
+
+<!-- Full-page overlays -->
+<div id="aboutSection" class="full-page-overlay">
+<div class="page-content">
+<button class="close-page" onclick="closeAllPages()">&times; إغلاق</button>
+<h2 class="section-title">عن الجامعة</h2>
+<p>تعد جامعة الأقصى للعلوم والتكنولوجيا صرحاً تعليمياً ريادياً، تجمع بين الحداثة التكنولوجية والأصالة العلمية لخدمة المجتمع اليمني.</p>
+<div class="info-card">
+<h3>الرؤية والرسالة</h3>
+<p>تتمثل الرؤية في توفير تعليم جامعي متطور ومتميز في بيئة تعليمية داعمة لجميع الطلاب.</p>
+</div>
+<div class="info-card">
+<h3>أهداف الجامعة</h3>
+<p>توفير تعليم متميز وبناء كوادر مؤهلة علمياً وأخلاقياً لتلبية احتياجات المجتمع وسوق العمل.</p>
+</div>
+</div>
+</div>
+
+<div id="facultiesSection" class="full-page-overlay">
+<div class="page-content">
+<button class="close-page" onclick="closeAllPages()">&times; إغلاق</button>
+<h2 class="section-title">كلياتنا</h2>
+<div class="info-card">
+<h3>كلية العلوم الطبية</h3>
+<p>الأقسام: صيدلة - تمريض - قبالة</p>
+</div>
+<div class="info-card">
+<h3>كلية العلوم الإدارية والإنسانية</h3>
+<p>الأقسام: إدارة أعمال - محاسبة - نظم معلومات إدارية - شريعة وقانون</p>
+</div>
+</div>
+</div><h2 class="section-title">الوثائق المطلوبة</h2>
+<ul>
+<li>أصل استمارة الثانوية العامة وصورتان مصدقتان.</li>
+<li>صورة البطاقة الشخصية أو العائلية.</li>
+<li>عشر صور فوتوغرافية 4×6 بخلفية بيضاء.</li>
+<li>سندات تسديد الرسوم واستمارة طلب الالتحاق.</li>
+<li>لغير اليمنيين: جواز سفر ساري وما يفيد قانونية الإقامة.</li>
+</ul>
+</div>
+</div>
+
+<!-- Facebook Section -->
+<section class="facebook-section">
+<h2>تابعنا على فيسبوك</h2>
+<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D61579917951873&tabs=timeline&width=500&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+width="500" height="600" style="border:none;overflow:hidden;border-radius:20px;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+<div class="footer-container">
+<img src="https://raw.githubusercontent.com/aqsa-un/.net/refs/heads/main/IMG-20251220-WA0030.png" class="footer-logo" alt="شعار الجامعة">
+<p class="address">الجمهورية اليمنية - صنعاء - الحتارش - شارع الجامعة - بعد أسواق اليمن السعيد</p>
+<div class="social-links">
+<a href="https://wa.me/967781555637" class="btn whatsapp-btn" target="_blank"><i class="fab fa-whatsapp"></i> واتساب</a>
+<a href="https://www.facebook.com/profile.php?id=61579917951873" class="btn facebook-btn" target="_blank"><i class="fab fa-facebook"></i> فيسبوك</a>
+</div>
+<p class="copyright">&copy; تصميم م/أمجد مساعد 2025 جامعة الأقصى للعلوم والتكنولوجيا</p>
+</div>
+</footer>
+
+<script>
+// JavaScript كامل
+function toggleMenu() {
+document.getElementById('sideMenu').classList.toggle('active');
+document.getElementById('menuOverlay').classList.toggle('active');
+}
+
+document.querySelectorAll('.submenu-toggle').forEach(btn => {
+btn.addEventListener('click', () => {
+btn.parentElement.classList.toggle('open');
+const icon = btn.querySelector('i');
+icon.classList.toggle('fa-chevron-down');
+icon.classList.toggle('fa-chevron-up');
+});
+});
+
+function openPage(pageId) {
+if(document.getElementById('sideMenu').classList.contains('active')) toggleMenu();
+document.getElementById(pageId).style.display = 'block';
+document.body.style.overflow = 'hidden';
+}
+
+function closeAllPages() {
+document.querySelectorAll('.full-page-overlay').forEach(p => p.style.display = 'none');
+document.body.style.overflow = 'auto';
+}
+
+function scrollToFooter() {
+toggleMenu();
+window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+}
+
+// Slider JS
+let sliderIndex = 0;
+const slides = document.querySelectorAll('.slider-container img');
+function showSlide() {
+slides.forEach((img,i)=> img.classList.remove('active'));
+slides[sliderIndex].classList.add('active');
+sliderIndex = (sliderIndex+1) % slides.length;
+}
+setInterval(showSlide,3000);
+</script>
 
 </body>
-
 </html>
 
-
-Resources
+<div id="admissionSection" class="full-page-overlay">
+<div class="page-content">
+<button class="close-page" onclick="closeAllPages()">&times; إغلاق</button>
+<h2 class="section-title">شروط القبول</h2>
+<ul>
+<li>الحصول على شهادة الثانوية العامة أو ما يعادلها.</li>
+<li>تسديد الرسوم الدراسية المطلوبة.</li>
+<li>استيفاء جميع الوثائق المطلوبة والمصدقة.</li>
+</ul>
+<h2 class
