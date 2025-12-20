@@ -70,9 +70,9 @@ body { font-family: 'Tajawal', sans-serif; background-color: #000; color: #fff; 
 .info-card { background: #111; padding: 25px; border-radius: 15px; border: 1px solid #333; margin-bottom: 20px; }
 
 /* Facebook Section */
-.facebook-section { padding: 60px 0; background: #0a0a0a; text-align: center; display: block; }
+.facebook-section { padding: 60px 0; background: #0a0a0a; text-align: center; display: flex; justify-content: center; }
 .facebook-section h2 { font-family: 'Cairo', sans-serif; color: #ca8a04; font-size: 2rem; margin-bottom: 30px; border-right: 5px solid #ca8a04; padding-right: 15px; display: inline-block; }
-.facebook-section iframe { display: block; margin: 0 auto; width: 100%; max-width: 500px; min-width: 320px; height: 600px; border:none; overflow:hidden; border-radius: 20px; }
+.facebook-section iframe { width: 100%; max-width: 500px; min-width: 320px; height: 600px; border:none; overflow:hidden; border-radius: 20px; }
 
 /* Footer */
 .footer { padding: 60px 0 20px; border-top: 5px solid #ca8a04; text-align: center; }
@@ -191,7 +191,6 @@ body { font-family: 'Tajawal', sans-serif; background-color: #000; color: #fff; 
 </div>
 </div>
 </section>
-
 <!-- Image Slider Section -->
 <section class="image-slider">
 <div class="container">
@@ -236,7 +235,18 @@ body { font-family: 'Tajawal', sans-serif; background-color: #000; color: #fff; 
 <p>الأقسام: إدارة أعمال - محاسبة - نظم معلومات إدارية - شريعة وقانون</p>
 </div>
 </div>
-</div><h2 class="section-title">الوثائق المطلوبة</h2>
+</div>
+
+<div id="admissionSection" class="full-page-overlay">
+<div class="page-content">
+<button class="close-page" onclick="closeAllPages()">&times; إغلاق</button>
+<h2 class="section-title">شروط القبول</h2>
+<ul>
+<li>الحصول على شهادة الثانوية العامة أو ما يعادلها.</li>
+<li>تسديد الرسوم الدراسية المطلوبة.</li>
+<li>استيفاء جميع الوثائق المطلوبة والمصدقة.</li>
+</ul>
+<h2 class="section-title">الوثائق المطلوبة</h2>
 <ul>
 <li>أصل استمارة الثانوية العامة وصورتان مصدقتان.</li>
 <li>صورة البطاقة الشخصية أو العائلية.</li>
@@ -312,14 +322,3 @@ setInterval(showSlide,3000);
 
 </body>
 </html>
-
-<div id="admissionSection" class="full-page-overlay">
-<div class="page-content">
-<button class="close-page" onclick="closeAllPages()">&times; إغلاق</button>
-<h2 class="section-title">شروط القبول</h2>
-<ul>
-<li>الحصول على شهادة الثانوية العامة أو ما يعادلها.</li>
-<li>تسديد الرسوم الدراسية المطلوبة.</li>
-<li>استيفاء جميع الوثائق المطلوبة والمصدقة.</li>
-</ul>
-<h2 class
